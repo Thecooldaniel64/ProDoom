@@ -16,8 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework import routers
+from weapons import views
+
+router = routers.DefaultRouter()
+router.register(r'weapons', views.WeaponViewSet)
+router.register(r'objects', views.ObjectViewSet)
+router.register(r'powerups', views.PowerUpViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('__debug__/', include('debug_toolbar.urls')),  
+    path('__debug__/', include('debug_toolbar.urls')),
+    path('', include(router.urls)),
 ]
